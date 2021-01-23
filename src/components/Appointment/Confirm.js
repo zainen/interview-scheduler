@@ -2,7 +2,8 @@ import React from 'react'
 
 import Button from "../Button"
 
-export default function ({onCancel, onConfirm}) {
+export default function (props) {
+  const {onCancel, onConfirm} = props
   return (
     <main className="appointment__card appointment__card--confirm">
       <h1 className="text--semi-bold">Delete the appointment?</h1>
