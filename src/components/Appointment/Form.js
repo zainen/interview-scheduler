@@ -4,10 +4,9 @@ import InterviewerList from '../InterviewerList'
 import Button from '../Button'
 
 export default function Form (props) {
-  const [name, setName] = useState(props.name || "")
-  const [interviewer, setInterviewer] = useState(props.interviewer || null)
-  console.log("my interview: ", props.interviewer)
-
+  const [name, setName] = useState(props.interview && props.interview.student ? props.interview.student : "")
+  const [interviewer, setInterviewer] = useState(props.interview && props.interview.interviewer ? props.interview.interviewer : null)
+  
   const reset = () => {
     setName('')
     setInterviewer(null)
@@ -33,7 +32,7 @@ export default function Form (props) {
         </form>
         <InterviewerList 
           interviewers={props.interviewers} 
-          interviewer={interviewer} 
+          interviewer={interviewer}
           setInterviewer={setInterviewer} 
         />
       </section>

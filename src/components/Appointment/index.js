@@ -18,6 +18,8 @@ const EDIT = 'EDIT'
 const CONFIRM = 'CONFIRM'
 const SAVING = 'SAVING'
 const DELETING = 'DELETING'
+const ERROR_SAVE = 'ERROR_SAVE'
+const ERROR_DELETE = 'ERROR_DELETE'
 
 export default function Appointment(props) {
   const { mode, transition, back} = useVisualMode(
@@ -31,10 +33,10 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    console.log("name: ", name, "interviewer: ", interviewer)
-    transition(SAVING)
+    transition(SAVING, true)
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true))
   }
 
   const cancel = () => {
@@ -44,10 +46,15 @@ export default function Appointment(props) {
     transition(EDIT)
   }
   const statusDelete = (id) => {
-    transition(DELETING)
+    transition(DELETING, true)
     props.onDelete(id)
     .then(() => transition(EMPTY))
+    .catch(() => transition(ERROR_DELETE, true))
   }
+
+  console.log("inside index", props)
+  console.log('props-interview', props.interview)
+  const interviewer = props.interview ? props.interviewers[props.interview.interviewer] : null
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -57,7 +64,7 @@ export default function Appointment(props) {
       {mode === SHOW && (
       <Show 
         student={props.interview.student} 
-        interviewer={props.interview.interviewer}
+        interviewer={interviewer}
         onEdit={edit}
         onDelete={() => transition(CONFIRM)}
         />)}
@@ -67,7 +74,7 @@ export default function Appointment(props) {
         interview={props.interview}
         interviewers={props.dayInterviewers}
         onSave={save}
-        onCancel={back}
+        onCancel={cancel}
       />
       )}
       {mode === CONFIRM && (
@@ -89,6 +96,12 @@ export default function Appointment(props) {
       )}
       {mode === DELETING && (
         <Status message={DELETING} />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message={ERROR_SAVE} onClose={() => transition(SHOW, true)} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message={ERROR_DELETE} onClose={() => transition(SHOW, true)} />
       )}
     </article>
   )

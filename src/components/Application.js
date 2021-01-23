@@ -8,7 +8,7 @@ import Appointment from "components/Appointment/index"
 import { useVisualMode } from "../hooks/useVisualMode"
 
 
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors"
+import { getAppointmentsForDay, getInterviewer, getInterviewersForDay } from "../helpers/selectors"
 
 // const appointments = [
 //   {
@@ -99,13 +99,14 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
   const schedule = dailyAppointments.map(appointment => {
-    const interview = getInterview(state, appointment.interview)
+    // const interviewer = getInterviewer(state, appointment.interview)
+    // console.log("interview: ", interview)
     return (
       <Appointment
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        interview={interview}
+        interview={appointment.interview}
         interviewers={state.interviewers}
         dayInterviewers={dayInterviewers}
         bookInterview={bookInterview}
@@ -124,6 +125,7 @@ export default function Application(props) {
       setState(prev => ({...prev, days: days.data, appointments: appointments.data, interviewers: interviewers.data}))
     });
   }, [])
+
   // console.log(`outside: ` ,state)
   return (
     <main className="layout">

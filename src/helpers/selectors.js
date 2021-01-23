@@ -8,7 +8,7 @@ const getAppointmentsForDay = (state, day) => {
 }
 
 
-const getInterview = (state, interview) => {
+const getInterviewer = (state, interview) => {
   if (!interview) return null
   const id = interview.interviewer
   const session = state.interviewers[id]
@@ -31,8 +31,17 @@ const getInterviewersForDay = (state, day) => {
   }
 }
 
+// const getInterviewersForDay = (state, day) => {
+//   return state.days.forEach(dayEntry => {
+//     if (dayEntry.name === day) {
+//       return dayEntry.interviewers.map(interviewerID => {
+//         return state.interviewers[interviewerID]
+//       })
+//     }
+//   })
+// }
 
 // console.log(getInterviewersForDay(state, 'Monday'))
 
 
-export { getAppointmentsForDay, getInterview, getInterviewersForDay }
+export { getAppointmentsForDay, getInterviewer, getInterviewersForDay }

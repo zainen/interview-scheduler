@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function (props) {
-  console.log(props)
+  console.log('Props: ', props)
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
