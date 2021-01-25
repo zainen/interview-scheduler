@@ -6,7 +6,6 @@ import Button from '../Button'
 export default function Form (props) {
   const [name, setName] = useState(props.interview && props.interview.student ? props.interview.student : "")
   const [interviewer, setInterviewer] = useState(props.interview && props.interview.interviewer ? props.interview.interviewer : null)
-  
   const reset = () => {
     setName('')
     setInterviewer(null)

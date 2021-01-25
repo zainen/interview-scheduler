@@ -25,8 +25,6 @@ export default function Appointment(props) {
   const { mode, transition, back} = useVisualMode(
     props.interview ? SHOW : EMPTY
   )
-  // console.log("as we click around", props)
-  // console.log('index', props)
 
   function save(name, interviewer) {
     const interview = {
@@ -52,8 +50,6 @@ export default function Appointment(props) {
     .catch(() => transition(ERROR_DELETE, true))
   }
 
-  console.log("inside index", props)
-  console.log('props-interview', props.interview)
   const interviewer = props.interview ? props.interviewers[props.interview.interviewer] : null
   return (
     <article className="appointment">
