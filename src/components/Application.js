@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios'
+import React from "react";
 
 import "components/Application.scss";
 
@@ -18,11 +17,9 @@ export default function Application(props) {
     deleteAppointment,
   } = useApplicationData()
 
-  console.log('state: ', state)
 
   const dayInterviewers = getInterviewersForDay(state, state.day)
   const dailyAppointments = getAppointmentsForDay(state, state.day)
-  console.log(state)
 
   const schedule = dailyAppointments.map(appointment => {
     return (

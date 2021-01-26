@@ -20,7 +20,6 @@ export default function Form (props) {
     props.onSave(name, interviewer);
   }
   const cancel = () => {
-    // setError('')
     reset()
     props.onCancel()
   }
