@@ -33,8 +33,8 @@ export default function Appointment(props) {
     };
     transition(SAVING, true)
     props.bookInterview(props.id, interview)
-      .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE, true))
+    .then(() => transition(SHOW))
+    .catch(() => transition(ERROR_SAVE, true))
   }
 
   const cancel = () => {
@@ -98,10 +98,10 @@ export default function Appointment(props) {
         <Status message={DELETING} />
       )}
       {mode === ERROR_SAVE && (
-        <Error message={ERROR_SAVE} onClose={() => transition(SHOW, true)} />
+        <Error message={ERROR_SAVE} onClose={back} />
       )}
       {mode === ERROR_DELETE && (
-        <Error message={ERROR_DELETE} onClose={() => transition(SHOW, true)} />
+        <Error message={ERROR_DELETE} onClose={back} />
       )}
     </article>
   )

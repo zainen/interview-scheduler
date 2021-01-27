@@ -88,7 +88,7 @@ export default {
         data: ''
       }) 
     }
-    if ( url === `/api/appointments/${endURL}`) {
+    if (url === `/api/appointments/${endURL}`) {
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
@@ -103,4 +103,15 @@ export default {
       })
     }
   }),
+  delete: jest.fn(url => {
+    const sectioned = url.split('/')
+    const endURL = sectioned[sectioned.length - 1]
+    if (url === `/api/appointments/${endURL}`) {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
+      })
+    }
+  })
 }

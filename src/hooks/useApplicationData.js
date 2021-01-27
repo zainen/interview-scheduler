@@ -46,12 +46,21 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${id}`)
     .then(() => {
       setState(prev => ({...prev}))
+      // setState(prev => ({...prev, appointments: {[id]: null}}))
       axios.get("/api/days")
       .then(days => {
         return setState(prev => ({...prev, days: days.data}))
       })
     })
   }
+
+  const spotsRemaining = (state) => {
+    return state.days.map(day => {
+      const availableSpots = day.appointments.filter(id => (!state.appointments[id].interview)).length
+      return day.availableSpots = availableSpots
+    })
+    // return setState(prev => ({...prev}))
+  }
   
-  return { state, setState, setDay, bookInterview, deleteAppointment }
+  return { state, setState, setDay, bookInterview, deleteAppointment, spotsRemaining }
 }

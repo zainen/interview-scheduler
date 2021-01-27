@@ -9,7 +9,7 @@ export default function (props) {
       <h1 className="text--semi-bold">Delete the appointment?</h1>
       <section className="appointment__actions">
         <Button onClick={onCancel} danger>Cancel</Button>
-        <Button onClick={onConfirm} danger>Confirm</Button>
+        <Button onClick={onConfirm} alt='danger-confirm' danger>Confirm</Button>
       </section>
     </main>
   )
