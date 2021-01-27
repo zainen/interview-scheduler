@@ -52,7 +52,10 @@ export default function Appointment(props) {
 
   const interviewer = props.interview ? props.interviewers[props.interview.interviewer] : null
   return (
-    <article className="appointment">
+    <article 
+      className="appointment"
+      data-testid="appointment"
+    >
       <Header time={props.time}/>
       {mode === EMPTY && (
       <Empty onAdd={() => transition(CREATE)}/>

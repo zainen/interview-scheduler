@@ -77,5 +77,30 @@ export default {
         data: fixtures.interviewers
       })
     }
-  })
+  }),
+  put: jest.fn((url, data) => {
+    const sectioned = url.split('/')
+    const endURL = sectioned[sectioned.length - 1]
+    if (url === '/api/days') {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
+      }) 
+    }
+    if ( url === `/api/appointments/${endURL}`) {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: ''
+      })
+    }
+    if (url === '/api/interviewers') {
+      return Promise.resolve({
+        status: 200,
+        statusText: 'OK',
+        data: '' 
+      })
+    }
+  }),
 }
