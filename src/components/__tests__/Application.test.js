@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
+import { render, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application"; 
 
@@ -19,7 +19,7 @@ describe('Application', ()  => {
     });
   });
   it('loads data, books an interview and reduces the sots remaining for the day by 1', async () => {
-    const { container, debug, queryByText } = render(<Application />)
+    const { container } = render(<Application />)
     await waitForElement(() => getByText(container, 'Archie Cohen'))
     const appointments = getAllByTestId(container, 'appointment')
     const appointment = appointments[0]
@@ -31,9 +31,9 @@ describe('Application', ()  => {
     fireEvent.click(getByText(appointment, 'Save'))
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
-    const day = getAllByTestId(container, 'day').find(day => {
-      return getByText(day, 'Monday')
-    })
+    // const day = getAllByTestId(container, 'day').find(day => {
+    //   return getByText(day, 'Monday')
+    // })
     // expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   })
   it('loads data, books an interview and reduces the spots remaining for Monday by 1', async () => {
@@ -46,9 +46,9 @@ describe('Application', ()  => {
     expect(getByText(appointment, 'Confirm'))
     fireEvent.click(getByText(appointment, 'Confirm'))
     expect(getByText(appointment, 'DELETING'))
-    const day = getAllByTestId(container, 'day').find(day => {
-      return getByText(day, 'Monday')
-    })
+    // const day = getAllByTestId(container, 'day').find(day => {
+    //   return getByText(day, 'Monday')
+    // })
   //   expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   })
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
@@ -80,9 +80,9 @@ describe('Application', ()  => {
     await waitForElement(() => getByAltText(appointment, "Add"));
   
     // 8. Check that the DayListItem with the text "Monday" also has the text "2 spots remaining".
-    const day = getAllByTestId(container, "day").find(day =>
-      queryByText(day, "Monday")
-    );
+    // const day = getAllByTestId(container, "day").find(day =>
+    //   queryByText(day, "Monday")
+    // );
     // expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
   it('loads data, edits an interview and keeps the spots remaining for Monday the same', async () => {
@@ -100,9 +100,9 @@ describe('Application', ()  => {
     fireEvent.click(getByText(appointment, 'Save'))
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
     await waitForElement(() => getByText(appointment, "Jeff"));
-    const day = getAllByTestId(container, 'day').find(day => {
-      return getByText(day, 'Monday')
-    })
+    // const day = getAllByTestId(container, 'day').find(day => {
+    //   return getByText(day, 'Monday')
+    // })
     // expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   })
   // it('shows the save error when failing to save an appointment', () => {
@@ -110,7 +110,7 @@ describe('Application', ()  => {
   // })
   it('shows the save error when failing to save an appointment', async () => {
     axios.put.mockRejectedValueOnce()
-    const { container, debug } = render(<Application />)
+    const { container } = render(<Application />)
     await waitForElement(() => getByText(container, 'Archie Cohen'))
     const appointments = getAllByTestId(container, 'appointment')
     const appointment = appointments[0]
