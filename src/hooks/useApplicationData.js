@@ -54,7 +54,6 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${id}`)
     
     .then(() => {
-      console.log(state.appointments[id].interview)
       setState(prev => ({...prev, appointments}))
       axios.get("/api/days")
       .then(days => {
