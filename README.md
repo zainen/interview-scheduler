@@ -21,3 +21,12 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Simple Scheduler 
+
+Schedule interviews with the listed interviewers
+
+Enter your name and book an interviewer from list of interviewers for that specific day
+
+
+## tested with Jest and Cypress

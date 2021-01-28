@@ -10,9 +10,9 @@ export default function useApplicationData() {
     // 
     appointments: {},
     interviewers: {}
-  })
+  });
   
-  const setDay = day => setState({...state, day})
+  const setDay = day => setState({...state, day});
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -43,10 +43,19 @@ export default function useApplicationData() {
     })
   }
   const deleteAppointment = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    }
     return axios.delete(`/api/appointments/${id}`)
+    
     .then(() => {
-      setState(prev => ({...prev}))
-      // setState(prev => ({...prev, appointments: {[id]: null}})) connectd to spotsRemaining
+      console.log(state.appointments[id].interview)
+      setState(prev => ({...prev, appointments}))
       axios.get("/api/days")
       .then(days => {
         return setState(prev => ({...prev, days: days.data}))
@@ -65,3 +74,15 @@ export default function useApplicationData() {
   
   return { state, setState, setDay, bookInterview, deleteAppointment }
 }
+
+
+
+
+// ~~~~~~~~ the way to do it in direct return ~~~~~~~~~
+// {...prev, 'appointments': {
+//   ...prev.appointments,
+//   [id]: {
+//     ...prev.appointments[id],
+//     'interview': null
+//   }
+// }}
