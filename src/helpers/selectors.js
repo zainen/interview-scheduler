@@ -20,15 +20,4 @@ const getInterviewersForDay = (state, day) => {
   }
 }
 
-// const getInterviewersForDay = (state, day) => {
-//   return state.days.forEach(dayEntry => {
-//     if (dayEntry.name === day) {
-//       return dayEntry.interviewers.map(interviewerID => {
-//         return state.interviewers[interviewerID]
-//       })
-//     }
-//   })
-// }
-
-
 export { getAppointmentsForDay, getInterviewersForDay }

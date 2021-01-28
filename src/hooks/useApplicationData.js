@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function useApplicationData() {
@@ -46,7 +46,7 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${id}`)
     .then(() => {
       setState(prev => ({...prev}))
-      // setState(prev => ({...prev, appointments: {[id]: null}}))
+      // setState(prev => ({...prev, appointments: {[id]: null}})) connectd to spotsRemaining
       axios.get("/api/days")
       .then(days => {
         return setState(prev => ({...prev, days: days.data}))
@@ -54,13 +54,14 @@ export default function useApplicationData() {
     })
   }
 
-  const spotsRemaining = (state) => {
-    return state.days.map(day => {
-      const availableSpots = day.appointments.filter(id => (!state.appointments[id].interview)).length
-      return day.availableSpots = availableSpots
-    })
-    // return setState(prev => ({...prev}))
-  }
+  // ~~~~~~~~~~~~~ to change to remove axios get after save and delete ~~~~~~~~~~~~~~
+  // const spotsRemaining = (state) => { 
+  //   return state.days.map(day => {
+  //     const availableSpots = day.appointments.filter(id => (!state.appointments[id].interview)).length
+  //     return day.availableSpots = availableSpots
+  //   })
+  //   // return setState(prev => ({...prev}))
+  // }
   
-  return { state, setState, setDay, bookInterview, deleteAppointment, spotsRemaining }
+  return { state, setState, setDay, bookInterview, deleteAppointment }
 }
